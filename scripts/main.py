@@ -7,7 +7,8 @@ Main script for loading raw data and making it accessible to modules A, B, and C
 import pandas as pd
 from modules import module_a, module_b, module_c
 
-RAW_DATA_PATH = "raw_data.csv"
+data_path = "raw_data.csv"
+raw_data = pd.read_csv(data_path)
 
 def main():
     """Main function to load raw data and make it accessible to all modules."""
