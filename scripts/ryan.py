@@ -1,5 +1,5 @@
 """
-If you want to test your code, 
+If you want to test your code, there are two options:  
 1. run 'python ryan.py' at your command line. 
    Be careful on your current directory(cd) - it should be run when cd is at ..{your directory}/scripts 
 2. Copy your code and check it works at ipynb. I made sanbox.ipynb for this purpose. 
