@@ -18,7 +18,7 @@ haunted_places_df = raw_data
 
 # Ensure the description column exists
 description_col = "description"  # Update if your column name differs
-if description_col not in haunted_df.columns:
+if description_col not in haunted_places_df.columns:
     raise ValueError(f"Column '{description_col}' not found in the file.")
 
 # Define flexible keyword mappings for multiple features
@@ -81,9 +81,9 @@ def determine_category(text, categories):
 # Apply keyword detection dynamically
 for column, config in keyword_categories.items():
     if "keywords" in config:  # Single-category (True/False)
-        haunted_df[column] = haunted_df[description_col].apply(lambda x: contains_keywords(str(x), config["keywords"]))
+        haunted_places_df[column] = haunted_places_df[description_col].apply(lambda x: contains_keywords(str(x), config["keywords"]))
     elif "categories" in config:  # Multi-category (e.g., Time of Day, Apparition Type, Event Type)
-        haunted_df[column] = haunted_df[description_col].apply(
+        haunted_places_df[column] = haunted_places_df[description_col].apply(
             lambda x: determine_category(str(x), config["categories"]))
 
 """
