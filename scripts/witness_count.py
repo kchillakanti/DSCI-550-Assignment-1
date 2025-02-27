@@ -6,7 +6,7 @@ import numpy as np
 
 
 nlp = spacy.load("en_core_web_sm")
-def witness_count_main (df):
+def witness_count_main():
     def witness_count(description):
         # 1st stage: Initialize witness count & use number parser to parse description
 
@@ -98,6 +98,8 @@ def witness_count_main (df):
 
         return final_count  # return final count
 
-    haunted_places_df = pd.read_csv(df, sep="\t")
+    haunted_places_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
     haunted_places_df["witness count"] = haunted_places_df["description"].apply(witness_count)
-    return haunted_places_df
+    return haunted_places_df[["witness count"]]
+
+output_for_chain = witness_count_main()
