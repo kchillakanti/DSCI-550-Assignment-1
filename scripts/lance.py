@@ -1,34 +1,50 @@
-# This is template. Feel free to modify it. 
-
-from main import raw_data
+# lance.py - This module is created to extract dates from the description using the LLM, parser and Regex
 import pandas as pd
-#from ryan import output_for_chain
-#import class_name from script_name_in_folder
+import re
+from dateutil import parser
+import spacy
+from datetime import datetime
 
-"""
-Class is a container which is good for put all the data and functions(methods) into one object 
-and generate many diversified version, which is called 'instance'. 
-If you do not need to create many instnaces, you can design your script without Class.
-"""
-class Myclass(): #If you have superclass to get inheritance, put the name in the paranthesis. 
-    # this class attributes are shared across all the instances of Myclass type.
-    class_attrribute_1 = 0 
-    class_attribute_2 = ""
+# Load the spaCy model for NLP
+nlp = spacy.load("en_core_web_sm")
+
+def extract_date(description):
+    if pd.isna(description) or not isinstance(description, str):
+        return datetime(2025, 1, 1).date()  # Default date
     
-    def __init__(self): # initializer 
-        instance_attribute_1 = 0 
-        instance_attribute_2 = "" 
-        print("Congrats! You've just generate an instance of Myclass") 
-        pass
+    # Try regex patterns for common date formats
+    date_patterns = [
+        r'\b(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\b',  # e.g., 04/15/2019 or 15-04-2019
+        r'\b(\d{4}-\d{1,2}-\d{1,2})\b',           # e.g., 2019-04-15
+        r'\b(\d{4})\b'                           # e.g., 2019
+    ]
+    
+    for pattern in date_patterns:
+        match = re.search(pattern, description)
+        if match:
+            try:
+                return parser.parse(match.group(0), fuzzy=True).date()
+            except Exception:
+                continue
 
+    # Use spaCy's NLP to identify natural language dates
+    doc = nlp(description)
+    for ent in doc.ents:
+        if ent.label_ == "DATE":
+            try:
+                return parser.parse(ent.text, fuzzy=True).date()
+            except Exception:
+                continue
 
-def custom_function(input):
-    """function tooltip - this will pop up when you call your function"""
-        
-    'Write your function here'
+    # Return default date if no date is found
+    return datetime(2025, 1, 1).date()
 
-    return 100 
+def add_date_occured_column():
+    new_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
+    if 'description' not in new_df.columns:
+        raise ValueError("DataFrame must contain a 'description' column.")
+    new_df['date_occured'] = new_df['description'].apply(extract_date)
+    # Return just the new column (sliced out as a DataFrame)
+    return new_df[['date_occured']]
 
-
-# output_for_chain : this conveys your output to next person
-output_for_chain = "put your sliced column(use df[['col_name']]), not the whole dataframe"
+output_for_chain = add_date_occured_column()
