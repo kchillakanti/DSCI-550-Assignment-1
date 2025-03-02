@@ -4,6 +4,7 @@ import re
 from dateutil import parser
 import spacy
 from datetime import datetime
+from scripts.data_reader import raw_data
 
 # Load the spaCy model for NLP
 nlp = spacy.load("en_core_web_sm")
@@ -40,7 +41,8 @@ def extract_date(description):
     return datetime(2025, 1, 1).date()
 
 def add_date_occured_column():
-    new_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
+    #new_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
+    new_df = raw_data
     if 'description' not in new_df.columns:
         raise ValueError("DataFrame must contain a 'description' column.")
     new_df['date_occured'] = new_df['description'].apply(extract_date)

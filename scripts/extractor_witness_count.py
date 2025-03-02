@@ -3,6 +3,8 @@ import spacy
 import re
 import math
 import numpy as np
+import pandas as pd 
+from scripts.data_reader import raw_data
 
 
 nlp = spacy.load("en_core_web_sm")
@@ -98,7 +100,8 @@ def witness_count_main():
 
         return final_count  # return final count
 
-    haunted_places_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
+    #haunted_places_df = pd.read_csv("../data/haunted_places.tsv", sep = "\t")
+    haunted_places_df = raw_data
     haunted_places_df["witness count"] = haunted_places_df["description"].apply(witness_count)
     return haunted_places_df[["witness count"]]
 

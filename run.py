@@ -1,8 +1,7 @@
-from scripts.data_reader import temp
+from scripts.main import temp
 
 
 if __name__ == "__main__":
-    temp()
-    #main()
+    temp() 
 
 

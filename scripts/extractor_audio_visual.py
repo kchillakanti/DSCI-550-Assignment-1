@@ -6,7 +6,7 @@ If you want to test your code, there are two options:
 
 """
 
-from data_reader import raw_data
+from scripts.data_reader import raw_data
 import pandas as pd
 import re
 
