@@ -18,6 +18,7 @@ conda env create -f environment.yaml
 
 When your environment is ready, run the main.py.
 ```
+conda activate ds550
 (ds550) python main.py 
 ``` 
 
