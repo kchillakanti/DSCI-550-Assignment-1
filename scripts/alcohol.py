@@ -1,7 +1,6 @@
 import pandas as pd 
 from data_reader import raw_data
 import requests 
-import requests
 from bs4 import BeautifulSoup
 
 def webcrawl_alcohol():
