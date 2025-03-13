@@ -4,11 +4,7 @@ import requests
 from datetime import datetime, timedelta
 import time
 from data_reader import raw_data
-
-import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-from datetime import datetime
 
 ##################################################################################3
 # Source 1 : https://www.timeanddate.com/astronomy/usa
