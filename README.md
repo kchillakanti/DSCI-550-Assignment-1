@@ -23,5 +23,5 @@ conda activate ds550
 ``` 
 
 ## Flowchart
-<img src="docs/flowchart.PNG" alt="Sample Image" width="500">
+<img src="docs/flowchart.PNG" alt="Sample Image" width="900">
 
