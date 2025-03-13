@@ -6,8 +6,9 @@
 - Kirthi, Lance, Rafayel, Kavi, Hyun, Ryan
 
 ## How to start 
-First, turn on your terminal and move your cd to scripts
+First, turn on your terminal, clone this git and move your cd to scripts
 ```
+git clone https://github.com/kchillakanti/DSCI-550-Assignment-1.git
 cd scripts
 ```
 
