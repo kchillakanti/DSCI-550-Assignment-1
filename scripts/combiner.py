@@ -27,6 +27,7 @@ def data_join(first_processed_df):
     """
 
     first_processed_df = first_processed_df
+    print('--df.shape(first_processed_df):',first_processed_df.shape)
     #########################################################################
     # Join1 - alcohol abuse data
     alcohol_csv = file_chekcer('alcohol','tsv') 
@@ -60,14 +61,14 @@ def data_join(first_processed_df):
     try: 
         print("Attempt to join daylight_source: USNO")
         # Slice out only the columns you need.
-        daylight_df = daylight_df[['city_latitude','city_longitude','daylight_minutes']]
-        merged_df = pd.merge(merged_df, daylight_df, on=('city_latitude','city_longitude'), how='left')
+        daylight_df = daylight_df[['daylight_minutes']]
+        merged_df = pd.concat([merged_df, daylight_df], axis=1)
 
         print("Attempt to daylight_source: timeanddata.com")
         from api_daylight import generate_daylight_avg_by_state
         avg_daylight_of_major_cities = generate_daylight_avg_by_state()
         merged_df['daylight_diff'] = merged_df['daylight_minutes'] - avg_daylight_of_major_cities
-        merged_df.to_csv('../data/join_s2.tsv',sep='\t', index=False) 
+        merged_df.to_csv('../data/join_s2.tsv',sep='\t', index=False) #--check interim output 
 
     except Exception as e : 
         print("Error occured - ", e)  
