@@ -6,14 +6,15 @@ If you want to test your code, there are two options:
 
 """
 
-from scripts.data_reader import raw_data
+from data_reader import raw_data
 import pandas as pd
 import re
 
 
 # Load the TSV file
 # raw_data = pd.read_csv('haunted_places.tsv', sep='\t')
-print(raw_data.head(2))
+print("  ◆ extract audio and visual features")
+
 haunted_places_df = raw_data
 
 # Ensure the description column exists

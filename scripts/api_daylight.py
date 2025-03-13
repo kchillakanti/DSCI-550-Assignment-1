@@ -3,7 +3,7 @@ import re
 import requests
 from datetime import datetime, timedelta
 import time
-from scripts.data_reader import raw_data
+from data_reader import raw_data
 
 import requests
 from bs4 import BeautifulSoup
@@ -119,16 +119,15 @@ def webcrawl_daylight():
 def generate_daylight_avg_by_state():
     # avg_by_state has two columns: [state, avg_daylight_minutes]
     df, avg_daylight_of_major_cities = webcrawl_daylight()
-    if df is not None and avg_daylight_of_major_cities is not None:
-        print("\n--- Raw Data (City-Level) ---")
-        print(df.head(20))
-
-        print("\n--- Average Daylight Hours of major cities ---")
-        #print(avg_daylight_of_major_cities.sort_values("avg_daylight_minutes", ascending=False))
+    #if df is not None and avg_daylight_of_major_cities is not None:
+    #    print("\n--- Raw Data (City-Level) ---")
+    #    print(df.head(20))
+    #    print("\n--- Average Daylight Hours of major cities ---")
+    #    print(avg_daylight_of_major_cities.sort_values("avg_daylight_minutes", ascending=False))
     #avg_daylight_of_major_cities.to_csv('../data/daylight_s1')
     return round(avg_daylight_of_major_cities,1)
 
-avg_daylight_of_major_cities = generate_daylight_avg_by_state()
+#avg_daylight_of_major_cities = generate_daylight_avg_by_state()
 
 #####################################################################################
 # Source 2 : https://aa.usno.navy.mil/data/Dur_OneYear
@@ -197,4 +196,5 @@ def batch_run(raw_data, chunk_size=500):
     return data[['daylight_minutes']]
 
 
-output_for_chain = batch_run(raw_data, chunk_size=500)  
+#output_for_chain = batch_run(raw_data, chunk_size=500)  
+#print("Total rows(daylight)",output_for_chain.shape[0])

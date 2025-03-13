@@ -4,9 +4,9 @@ import re
 import math
 import numpy as np
 import pandas as pd 
-from scripts.data_reader import raw_data
+from data_reader import raw_data
 
-
+print("  ◆ extract number of witness feature")
 nlp = spacy.load("en_core_web_sm")
 def witness_count_main():
     def witness_count(description):

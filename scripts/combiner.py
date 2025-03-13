@@ -1,5 +1,6 @@
 import os 
 import pandas as pd 
+from data_reader import raw_data
 
 def file_chekcer(keyword:str, file_type:str):
     """
@@ -31,24 +32,28 @@ def data_join(first_processed_df):
     alcohol_csv = file_chekcer('alcohol','tsv') 
     if alcohol_csv:
         print("Your alcohol abuse data is ready to be joined.")
-        alcohol_df = pd.read_csv(f"{alcohol_csv[0]}")
+        alcohol_df = pd.read_csv(f"../data/{alcohol_csv[0]}", )
         merged_df = pd.merge(first_processed_df, alcohol_df, on="state", how="left")
     else: 
+        print("You don't have alcohol abuse dataset to join. Initiating web crawling protocol...")
         from alcohol import generate_merge_df, webcrawl_alcohol
         df = webcrawl_alcohol()
         merged_df = generate_merge_df(df) 
 
     #########################################################################
     # Join2 - daylight data 
-    daylight_csv = file_chekcer('daylight','tsv')  
-    if daylight_csv:  
+    daylight_tsv = file_chekcer('daylight','tsv')  
+    if daylight_tsv:  
         print("Your daylight data is ready to be joined.")  
-        daylight_df = pd.read_csv(daylight_csv[0]) 
+        daylight_df = pd.read_csv(f"../data/{daylight_tsv[0]}", sep='\t') 
     else: 
         # If raw data to join is not prepared, go and get it. 
-        print("You need to download your dataset through API.")
+        print("You need to download your dataset through API. Initiating the protocol...")
         print("="*30,"Estimated time cost: 100 minutes","="*30)
-        from api_daylight import output_for_chain as daylight_df
+        from api_daylight import batch_run
+        output_for_chain = batch_run(raw_data, chunk_size=500)  
+        print("Total rows(daylight)",output_for_chain.shape[0])
+
 
     try: 
         print("Attempt to join daylight_source: USNO")
@@ -57,23 +62,21 @@ def data_join(first_processed_df):
         merged_df = pd.merge(merged_df, daylight_df, on=('city_latitude','city_longitude'), how='left')
 
         print("Attempt to daylight_source: timeanddata.com")
-        from api_daylight import avg_daylight_of_major_cities
+        from api_daylight import generate_daylight_avg_by_state
+        avg_daylight_of_major_cities = generate_daylight_avg_by_state()
         merged_df['daylight_diff'] = merged_df['daylight_minutes'] - avg_daylight_of_major_cities
 
     except Exception as e : 
         print("Error occured - ", e)  
         
     finally: 
-        print("df.head(5):", merged_df.head(5)) 
+        print("daylight added-- .head(5):\n", merged_df.head(5)) 
     
     ########################################################################
-    # Join3 - rafayel's data 
-    your_dataset = file_chekcer('keyword_for_filename','type_of_your_file') 
-    if your_dataset: 
-        print("Your daylight data is ready to be joined.")  
-        your_df = pd.read_csv(your_dataset[0]) #[0] means the first file of the searched list of files. If you have multiple files to read, go for-loop or list comprehension. 
-    
-    else: # if your dataset is not ready, run data collecting function
-        # from rafayel.py import func_1, func_2 
-        # write your code here
-        pass 
+    # Join3 - otherMIME type
+    print("Attemp to join otherMIME type -(1)public school data, (2)weather data, (3)arcgis images")
+    from otherMIME import add_external_datasets
+    final_df = add_external_datasets(merged_df) 
+
+    return final_df 
+

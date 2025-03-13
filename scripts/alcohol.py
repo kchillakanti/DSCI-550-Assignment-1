@@ -40,24 +40,24 @@ def generate_merge_df(df):
     df["%_under_21"] = df["%_under_21"].str.replace("%", "").astype(float) / 100
 
     # Display the DataFrame
-    print(df)
+    #print(df)
 
     # Save the data to a CSV file
-    df.to_csv("./data/alcohol_abuse_statistics.csv", index=False)
-    alcohol_df = pd.read_csv("./data/alcohol_abuse_statistics.csv")  
+    df.to_csv("../data/alcohol_abuse_statistics.csv", index=False)
+    alcohol_df = pd.read_csv("../data/alcohol_abuse_statistics.csv")  
 
     # standardize state names (convert to uppercase for consistency)
     raw_data['state'] = raw_data['state'] #.str.upper()
     alcohol_df['state'] = alcohol_df['state'] #.str.upper()
 
-    print("Unique states in Haunted Dataset:", raw_data['state'].unique())
-    print("Unique states in Alcohol Dataset:", alcohol_df['state'].unique())
+    #print("Unique states in Haunted Dataset:", raw_data['state'].unique())
+    #print("Unique states in Alcohol Dataset:", alcohol_df['state'].unique())
 
     #  Merge datasets on the 'State' column
     merged_df = pd.merge(raw_data, alcohol_df, on="state", how="left")
-    print("Total rows:", merged_df.shape[0])
-    print("NA in Total_Death:", merged_df[merged_df['total_deaths'].isna()].shape[0])
-    print("NA in % Under 21:", merged_df[merged_df['%_under_21'].isna()].shape[0]) 
+    print("Total rows(alcohol):", merged_df.shape[0])
+    #print("NA in Total_Death:", merged_df[merged_df['total_deaths'].isna()].shape[0])
+    #print("NA in % Under 21:", merged_df[merged_df['%_under_21'].isna()].shape[0]) 
     return merged_df
     # Save the enriched dataset
     #merged_df.to_csv("haunted_places_with_alcohol.csv", index=False)
@@ -74,8 +74,8 @@ def correlation_df(alcohol_df):
     correlation = correlation_df[['haunted_places_count', 'Alcohol Abuse Rate']].corr()
 
     # Print correlation results
-    print("\n🔍 Correlation between Alcohol Abuse and Haunted Places:")
-    print(correlation)
+    #print("\n🔍 Correlation between Alcohol Abuse and Haunted Places:")
+    #print(correlation)
 
 
 if __name__ == "__main__": 

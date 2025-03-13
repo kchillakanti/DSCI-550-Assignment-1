@@ -4,9 +4,10 @@ import re
 from dateutil import parser
 import spacy
 from datetime import datetime
-from scripts.data_reader import raw_data
+from data_reader import raw_data
 
 # Load the spaCy model for NLP
+print("  ◆ extract date feature")
 nlp = spacy.load("en_core_web_sm")
 
 def extract_date(description):
