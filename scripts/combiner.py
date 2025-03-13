@@ -39,6 +39,7 @@ def data_join(first_processed_df):
         from alcohol import generate_merge_df, webcrawl_alcohol
         df = webcrawl_alcohol()
         merged_df = generate_merge_df(df) 
+    print('--df.shape(alcohol added):',merged_df.shape)
 
     #########################################################################
     # Join2 - daylight data 
@@ -53,6 +54,7 @@ def data_join(first_processed_df):
         from api_daylight import batch_run
         output_for_chain = batch_run(raw_data, chunk_size=500)  
         print("Total rows(daylight)",output_for_chain.shape[0])
+        daylight_df = output_for_chain
 
 
     try: 
@@ -65,18 +67,20 @@ def data_join(first_processed_df):
         from api_daylight import generate_daylight_avg_by_state
         avg_daylight_of_major_cities = generate_daylight_avg_by_state()
         merged_df['daylight_diff'] = merged_df['daylight_minutes'] - avg_daylight_of_major_cities
+        merged_df.to_csv('../data/join_s2.tsv',sep='\t', index=False) 
 
     except Exception as e : 
         print("Error occured - ", e)  
         
     finally: 
-        print("daylight added-- .head(5):\n", merged_df.head(5)) 
-    
+        #print("daylight added-- .head(3):\n", merged_df.head(3)) 
+        print('--df.shape(daylight added):',merged_df.shape)
     ########################################################################
     # Join3 - otherMIME type
     print("Attemp to join otherMIME type -(1)public school data, (2)weather data, (3)arcgis images")
     from otherMIME import add_external_datasets
-    final_df = add_external_datasets(merged_df) 
+    final_df = add_external_datasets(merged_df)
+    print('--df.shape(arcgis added):',final_df.shape) 
 
     return final_df 
 

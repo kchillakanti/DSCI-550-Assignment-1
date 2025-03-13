@@ -55,7 +55,7 @@ def generate_merge_df(df):
 
     #  Merge datasets on the 'State' column
     merged_df = pd.merge(raw_data, alcohol_df, on="state", how="left")
-    print("Total rows(alcohol):", merged_df.shape[0])
+    #print("Total rows(alcohol):", merged_df.shape[0])
     #print("NA in Total_Death:", merged_df[merged_df['total_deaths'].isna()].shape[0])
     #print("NA in % Under 21:", merged_df[merged_df['%_under_21'].isna()].shape[0]) 
     return merged_df

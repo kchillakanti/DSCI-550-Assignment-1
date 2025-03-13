@@ -192,7 +192,7 @@ def batch_run(raw_data, chunk_size=500):
 
     # Assign results to the dataframe
     data['daylight_minutes'] = daylight_results
-    data.to_csv('../data/daylight_added.tsv',sep='\t')
+    data.to_csv('../data/daylight_added.tsv',sep='\t',index=False) 
     return data[['daylight_minutes']]
 
 

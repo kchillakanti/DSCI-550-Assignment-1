@@ -496,7 +496,7 @@ def add_last_dataset(second_dataset_added):
     result_df = find_nearby_points_fast(second_dataset_added, blue_df, orange_df)
     result_df = result_df.merge(mental_health_df, how='left', on='state')
     print("Feature extraction is done successfully. Save the result in arcgis_img.csv")
-    result_df.reset_index(drop=True).to_csv('../data/arcgis_img.csv')
+    result_df.to_csv('../data/arcgis_img.csv',index=False) 
 
     print("="*30,"otherMIME--arcgis image data has been added successfully","="*30 )
     return result_df
