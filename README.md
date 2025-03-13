@@ -22,5 +22,5 @@ When your environment is ready, run the main.py.
 ``` 
 
 ## Flowchart
-<img src="img/sample.jpg" alt="Sample Image" width="500">
+<img src="docs/flowchart.png" alt="Sample Image" width="500">
 
