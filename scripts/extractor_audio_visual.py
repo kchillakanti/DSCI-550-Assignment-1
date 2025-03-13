@@ -25,37 +25,48 @@ if description_col not in haunted_places_df.columns:
 # Define flexible keyword mappings for multiple features
 keyword_categories = {
     "Audio": {
-        "keywords": ["hear", "heard", "hearing"]
+        "keywords": ["hear", "heard", "hearing", "whisper", "whispering", "whispers",
+        "scream", "screaming", "screams", "cry", "crying", "cries",
+        "voice", "voices", "moan", "moaning", "groan", "groaning",
+        "footsteps", "knocking", "knocks", "bang", "banging",
+        "chant", "chanting", "murmur", "murmuring", "shout", "shouting",
+        "howl", "howling", "laughter", "laughing"]
     },
     "Visual": {
-        "keywords": ["saw", "see", "seeing", "seen", "appears", "appeared"]
+        "keywords": ["saw", "see", "seeing", "seen", "appears", "appeared",
+        "manifest", "manifesting", "manifested",
+        "glow", "glowing", "light", "lights", "shimmer", "shimmering",
+        "shadow", "shadows", "figure", "figures",
+        "floating", "hovering", "shape", "shapes",
+        "outline", "apparition", "phantom", "ghostly",
+        "mist", "fog", "transparent", "translucent", "blurry",
+        "flash", "flashes", "blink", "blinking", "glimpse", "glimpsed"]
     },
     "Time of Day": {
         "categories": {
-            "Morning": ["morning", "sunrise"],
-            "Afternoon": ["afternoon", "midday"],
-            "Evening": ["evening", "nightfall"],
-            "Dusk": ["dusk", "sunset"],
-            "Night": ["night", "midnight"]
+            "Morning": ["morning", "sunrise", "dawn", "daybreak", "midday", "early"],
+            "Evening": ["evening", "night", "midnight", "after dark", "in the dark", "nighttime", "moonlit", "witching hour"],
+            "Dusk": ["dusk", "sunset",  "twilight", "dimming light", "fading light", "nightfall", "afternoon"]
         }
     },
     "Apparition Type": {
         "categories": {
-            "Ghost": ["ghost", "spirit", "phantom", "specter"],
-            "Orb": ["orb", "floating light"],
-            "UFO": ["ufo"],
-            "UAP": ["uap"],
-            "Male": ["male figure", "man", "gentleman"],
-            "Female": ["female figure", "woman", "lady"],
-            "Child": ["child", "boy", "girl", "young figure"],
-            "Several Ghosts": ["several ghosts", "multiple spirits", "many apparitions"]
+            "Ghost": ["ghost", "spirit", "phantom", "specter", "shade", "wraith"],
+            "Orb": ["orb", "floating light", "ball of", "glowing sphere", "glowing ball"],
+            "UFO": ["ufo", "unidentified flying object", "alien", "aliens", "flying saucer", "extraterrestrial"],
+            "UAP": ["uap", "unidentified aerial phenomenon", "flying object", "in the sky"],
+            "Male": ["male figure", "male ghost", "gentleman", "male apparition", "male spirit"],
+            "Female": ["female figure", "female ghost", "lady spirit", "female apparition", "woman wearing", "woman dressed in", "lady figure"],
+            "Child": ["child figure", "boy ghost", "young figure", "child spirit", "young apparition", "girl ghost"],
+            "Several Ghosts": ["several ghosts", "many ghosts", "multiple ghosts", "multiple spirits", "many apparitions", "group of spirits", "many phantoms"]
         }
     },
     "Event Type": {
         "categories": {
-            "Murder": ["murder", "homicide", "killed", "stabbed", "shot", "strangled", "assassinated"],
-            "Death": ["died", "corpse", "dead body", "passed away", "deceased", "remains", "funeral"],
-            "Supernatural Phenomenon": ["haunted", "paranormal", "poltergeist", "possession", "supernatural", "entity", "demonic"]
+            "Murder": ["murder", "homicide", "killed", "stabbed", "shot", "strangled", "assassinated", "execution", "death by violence"],
+            "Death": ["died", "corpse", "dead body", "passed away", "deceased", "remains", "funeral", "grave", "burial", "rest in peace", "lost soul"],
+            "Supernatural Phenomenon": ["haunted", "paranormal", "poltergeist", "possession", "supernatural", "entity", "demonic", "paranormal activity", "supernatural event",
+            "ghostly encounter", "haunting", "ghost activity", "manifestation"]
         }
     }
 }
