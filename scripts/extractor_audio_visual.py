@@ -51,7 +51,7 @@ keyword_categories = {
     },
     "Apparition Type": {
         "categories": {
-            "Ghost": ["ghost", "spirit", "phantom", "specter", "shade", "wraith"],
+            "Ghost": ["ghost", "spirit", "phantom", "specter", "shade", "wraith", "strange figure"],
             "Orb": ["orb", "floating light", "ball of", "glowing sphere", "glowing ball"],
             "UFO": ["ufo", "unidentified flying object", "alien", "aliens", "flying saucer", "extraterrestrial"],
             "UAP": ["uap", "unidentified aerial phenomenon", "flying object", "in the sky"],
@@ -63,9 +63,9 @@ keyword_categories = {
     },
     "Event Type": {
         "categories": {
-            "Murder": ["murder", "homicide", "killed", "stabbed", "shot", "strangled", "assassinated", "execution", "death by violence"],
+            "Murder": ["murder", "murdered", "homicide", "killed", "stabbed", "shot", "strangled", "assassinated", "execution", "death by violence"],
             "Death": ["died", "corpse", "dead body", "passed away", "deceased", "remains", "funeral", "grave", "burial", "rest in peace", "lost soul"],
-            "Supernatural Phenomenon": ["haunted", "paranormal", "poltergeist", "possession", "supernatural", "entity", "demonic", "paranormal activity", "supernatural event",
+            "Supernatural Phenomenon": ["haunted", "paranormal", "poltergeist", "possession", "supernatural", "entity", "demon", "demonic", "paranormal activity", "supernatural event",
             "ghostly encounter", "haunting", "ghost activity", "manifestation"]
         }
     }
