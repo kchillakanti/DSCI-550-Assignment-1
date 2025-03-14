@@ -29,11 +29,12 @@ Our Assignment 1 python scripts use various Python libraries for natural languag
 3. Data Manipulation & Analysis
 - pandas - Essential for handling structured data such as CSVs and tables.
 - geopandas - Extends pandas for geospatial data analysis.
+- matplotlib - A powerful plotting library for creating static, animated, and interactive visualizations in Python.
 - numpy (>=2.0.0) - Enables fast numerical computations and array operations.
-- scipy - Provides advanced scientific computing tools.
 
 4. Geospatial Analysis
 - shapely - Used for computational geometry and spatial operations.
+- scipy - A scientific computing library that provides tools for optimization, signal processing, statistics, and numerical integration.
 
 5. Machine Learning
 - scikit-learn - Offers tools for classification, regression, clustering, and other ML tasks.
